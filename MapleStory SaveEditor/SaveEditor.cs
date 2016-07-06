@@ -80,7 +80,10 @@ namespace MapleStory_SaveEditor
                     numericUpDown2.Value = character.ReadInt32();
                     character.Dispose();
                 }
-
+                else
+                {
+                    MessageBox.Show("playerData.dat not found!");
+                }
                 if (File.Exists(path + "\\summary_1.dat"))
                 {
                     BinaryReader summary = new BinaryReader(File.OpenRead(path + "\\summary_1.dat"));
@@ -119,10 +122,20 @@ namespace MapleStory_SaveEditor
                 }
                 else
                 {
-                    MessageBox.Show("Can't find savefiles!");
+                    MessageBox.Show("Can't find summary files!");
                 }
+                if (File.Exists(path + "\\inventory.dat"))
+                {
+                    BinaryReader inventory = new BinaryReader(File.OpenRead(path + "\\inventory.dat"));
+                    inventory.BaseStream.Position = 0x8;
+                    numericUpDown3.Value = inventory.ReadInt32();
 
 
+                }
+                else
+                {
+                    MessageBox.Show("inventory.dat not found!");
+                }
             }
 
         }
@@ -153,6 +166,11 @@ namespace MapleStory_SaveEditor
         }
 
         private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown3_ValueChanged(object sender, EventArgs e)
         {
 
         }
